@@ -119,23 +119,37 @@ python3 -m http.server 8080
 - Адаптив: 480 / 960 / desktop
 - 404 с фирменной графикой
 
-## Доменное имя
+## Домен
 
-Рекомендуемые варианты для регистрации:
-- `moyvedi.ru` — основной (англоязычный, премиум-зона)
-- `vedi.life` — альтернатива
-- `вéди.рф` — кириллический, для пожилой аудитории
-- `vedi.ru` — короткий и узнаваемый
+**Основной:** `moyvedi.ru` (REG.RU, ns1.reg.ru/ns2.reg.ru)
 
-Регистраторы: REG.RU, RU-CENTER, Namecheap, Cloudflare Registrar (без наценок).
+**DNS-записи (на reg.ru):**
+
+| Тип | Имя | Значение |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `antonkuzmenkov.github.io.` |
+
+`CNAME` файл в корне репо: `moyvedi.ru` (нужен GitHub Pages).
+
+## Деплой / прод
+
+- **GitHub Pages:** `https://antonkuzmenkov.github.io/moyvedi/` ✅ live
+- **Custom domain:** `https://moyvedi.ru` (после пропагации NS)
+- **Auto-deploy:** push в `master` → Actions → live за ~22 секунды
 
 ## Следующие шаги
 
-- [ ] Зарегистрировать домен
-- [ ] Задеплоить на Cloudflare Pages
+- [x] Зарегистрировать домен (`moyvedi.ru`, REG.RU)
+- [x] DNS A/CNAME записи на GitHub Pages
+- [ ] Дождаться пропагации NS (до 4 часов после смены)
+- [ ] Активировать SSL Let's Encrypt в GitHub Pages
 - [ ] Подключить Formspree/Tally для централизованной воронки
 - [ ] Подключить Yandex.Metrica
-- [ ] Создать OG-image (1200×630) с логотипом и слоганом
+- [ ] Подключить Telegram Bot для уведомлений о заявках
 - [ ] Подключить Decap CMS для онлайн-редактирования
 - [ ] Подать уведомление в РКН (оператор персональных данных)
 
@@ -147,3 +161,22 @@ python3 -m http.server 8080
 - **Tally.so** — бесплатные формы, CSV-экспорт, Slack/Telegram уведомления
 - **Telegram Bot** — заявка → сообщение в ваш чат через Bot API
 - **CRM** (Bitrix24, amoCRM, Notion) — для масштабирования
+
+---
+
+## Чек-лист текущего состояния
+
+| Компонент | Статус |
+|---|---|
+| Лендинг (Hero/Trust/Problem/Solution/Steps/How/Tariffs/FAQ/CTA) | ✅ live |
+| Privacy + Terms (ФЗ-152) | ✅ live |
+| 404 + sitemap + robots + manifest + OG-image | ✅ live |
+| CMS на `/admin/` (редактор + воронка заявок) | ✅ live |
+| Модалка заявки (RU phone-маска + localStorage + mailto) | ✅ |
+| GitHub Pages auto-deploy (~22s после push) | ✅ |
+| Domain `moyvedi.ru` зарегистрирован | ✅ 2026-04-29 |
+| DNS-записи (5 шт) | ✅ ns1.reg.ru/ns2.reg.ru |
+| NS-делегация на TLD RU | ⏳ (до 4 часов) |
+| HTTPS на `moyvedi.ru` | ⏸ ждёт пропагацию |
+| Yandex.Metrica | ⏸ нужен ID |
+| Telegram Bot для заявок | ⏸ нужен токен |

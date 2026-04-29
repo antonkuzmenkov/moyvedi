@@ -19,7 +19,7 @@ case "$MODE" in
       echo "Устанавливаем Wrangler CLI…"
       npm install -g wrangler
     fi
-    wrangler pages deploy . --project-name=vedi-site
+    wrangler pages deploy . --project-name=moyvedi
     ;;
 
   github)
@@ -31,7 +31,7 @@ case "$MODE" in
     git add -A
     git commit -m "deploy: $(date +%Y-%m-%d_%H:%M)" || true
     if ! git remote get-url origin &> /dev/null; then
-      echo "Введи URL GitHub-репо (например git@github.com:user/vedi-site.git):"
+      echo "Введи URL GitHub-репо (например git@github.com:user/moyvedi.git):"
       read -r REPO_URL
       git remote add origin "$REPO_URL"
     fi
