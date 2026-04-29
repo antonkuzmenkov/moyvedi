@@ -62,6 +62,19 @@
   .checkbox { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--fg-2); }
   .checkbox input { width: auto; }
 
+  /* Image picker */
+  .img-picker { display: flex; gap: 10px; align-items: center; }
+  .img-picker input { flex: 1; }
+  .img-picker .preview {
+    width: 56px; height: 56px; border-radius: 10px; object-fit: contain;
+    background: #FCFBFA; border: 1px solid rgba(79,70,229,0.15);
+    padding: 6px;
+  }
+  .img-picker .preview.dark { background: var(--indigo-950); }
+  .img-picker .upload {
+    padding: 11px 16px; white-space: nowrap;
+  }
+
   /* Leads */
   .lead-card { background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 12px; border: 1px solid rgba(79,70,229,0.1); }
   .lead-card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
@@ -136,12 +149,28 @@
   <div class="tab-content active" id="tab-content">
     <div class="panel">
       <h2>Бренд</h2>
-      <p class="desc">Имя, тагалайн, контакты.</p>
+      <p class="desc">Имя, тагалайн, контакты, логотипы.</p>
       <div class="grid-2">
         <div class="field"><label>Название</label><input data-path="brand.name" type="text"></div>
         <div class="field"><label>Email</label><input data-path="brand.email" type="email"></div>
       </div>
       <div class="field"><label>Тагалайн</label><input data-path="brand.tagline" type="text"></div>
+      <div class="field">
+        <label>Логотип (основной)</label>
+        <div class="img-picker">
+          <input data-path="brand.logo" type="text">
+          <button class="btn btn-ghost upload" type="button" onclick="pickImage('brand.logo')">📁 Загрузить</button>
+          <img class="preview" id="preview-brand-logo" src="" alt="">
+        </div>
+      </div>
+      <div class="field">
+        <label>Логотип (белый, для тёмного фона)</label>
+        <div class="img-picker">
+          <input data-path="brand.logoWhite" type="text">
+          <button class="btn btn-ghost upload" type="button" onclick="pickImage('brand.logoWhite')">📁 Загрузить</button>
+          <img class="preview dark" id="preview-brand-logoWhite" src="" alt="">
+        </div>
+      </div>
     </div>
 
     <div class="panel">
@@ -237,8 +266,9 @@ function renderAll() {
   document.querySelectorAll('[data-path]').forEach(el => {
     const p = el.dataset.path;
     el.value = get(DATA, p) || '';
-    el.oninput = () => { set(DATA, p, el.value); markDirty(); };
+    el.oninput = () => { set(DATA, p, el.value); markDirty(); refreshImagePreviews(); };
   });
+  refreshImagePreviews();
 
   const hm = document.getElementById('hero-metrics-list');
   hm.innerHTML = '';
@@ -331,6 +361,91 @@ function addFaq() {
 function markDirty() {
   document.getElementById('status').textContent = 'Несохранённые изменения';
   document.getElementById('status').style.color = '#FCD34D';
+}
+
+// === Загрузка картинок в репо ===
+function refreshImagePreviews() {
+  ['brand-logo', 'brand-logoWhite'].forEach(key => {
+    const el = document.getElementById('preview-' + key);
+    if (!el) return;
+    const path = get(DATA, key.replace('-', '.'));
+    if (path) {
+      el.src = '../' + path + '?t=' + Date.now(); // bust кэш
+      el.style.display = '';
+    } else {
+      el.removeAttribute('src');
+      el.style.display = 'none';
+    }
+  });
+}
+
+async function uploadImage(file) {
+  const token = getToken();
+  if (!token) throw new Error('Сначала войди — нажми «🔑 Войти»');
+  if (file.size > 5 * 1024 * 1024) throw new Error('Файл больше 5 МБ. Сожми сначала.');
+
+  const ts = Date.now();
+  const safe = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_').toLowerCase();
+  const path = `assets/uploads/${ts}-${safe}`;
+
+  // base64 для бинарника
+  const buffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  const b64 = btoa(binary);
+
+  const author = getAuthorName();
+  const ts2 = new Date().toISOString().replace('T', ' ').slice(0, 16);
+
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: `cms: ${author} загрузил ${safe} (${ts2})`,
+      content: b64,
+      branch: BRANCH
+    })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    if (res.status === 401) throw new Error('Токен истёк. Войди заново.');
+    throw new Error(err.message || `GitHub error ${res.status}`);
+  }
+  return path;
+}
+
+function pickImage(targetPath) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const status = document.getElementById('status');
+    status.textContent = `⏳ Загружаю ${file.name}...`;
+    status.style.color = '#FCD34D';
+    try {
+      const path = await uploadImage(file);
+      set(DATA, targetPath, path);
+      const field = document.querySelector(`[data-path="${targetPath}"]`);
+      if (field) field.value = path;
+      markDirty();
+      // Подождём пару секунд, чтобы CDN GitHub Pages успел обновиться
+      setTimeout(refreshImagePreviews, 1000);
+      status.textContent = `✅ Картинка загружена: ${path} · нажми «💾 Сохранить на сайт» чтобы применить`;
+      status.style.color = '#10B981';
+    } catch (err) {
+      console.error(err);
+      status.textContent = '❌ Ошибка: ' + err.message;
+      status.style.color = '#F87171';
+    }
+  };
+  input.click();
 }
 
 // === Скачать как файл (резервный вариант) ===
