@@ -87,7 +87,44 @@
     </div>
     <div class="actions">
       <a href="../index.html" target="_blank" class="btn btn-ghost">Открыть сайт ↗</a>
-      <button class="btn btn-primary" onclick="save()">Скачать site.json</button>
+      <button class="btn btn-ghost" onclick="openAuthModal()" id="auth-btn" title="Настройки доступа">🔑 <span id="auth-status">Войти</span></button>
+      <button class="btn btn-primary" onclick="commitSave()">💾 Сохранить на сайт</button>
+    </div>
+  </div>
+
+  <!-- Auth modal -->
+  <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(30,27,75,0.6); backdrop-filter:blur(8px); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:20px; padding:32px; max-width:520px; width:90%; box-shadow:0 30px 60px rgba(30,27,75,0.3);">
+      <h2 style="font-family:var(--font-display); font-size:22px; color:var(--indigo-950); margin:0 0 12px;">Доступ к сохранению</h2>
+      <p style="font-size:14px; color:var(--slate-500); line-height:1.5; margin:0 0 18px;">
+        Чтобы изменения попали на сайт, нужен GitHub токен.
+        Создаётся один раз на компьютер, хранится в браузере.
+      </p>
+      <details style="margin-bottom:18px; padding:14px; background:#FCFBFA; border-radius:10px; border:1px solid rgba(79,70,229,0.1);">
+        <summary style="font-size:13px;">📖 Как получить токен (1 минута)</summary>
+        <ol style="font-size:13px; line-height:1.7; padding-left:20px; color:var(--fg-2);">
+          <li>Открой <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--indigo-600);">github.com → Settings → Tokens (fine-grained)</a></li>
+          <li>Token name: <code>Веди CMS</code></li>
+          <li>Expiration: 90 days (или больше)</li>
+          <li>Repository access: <b>Only select repositories</b> → <code>antonkuzmenkov/moyvedi</code></li>
+          <li>Permissions → Repository permissions → <b>Contents: Read and write</b></li>
+          <li>Кнопка «Generate token» → скопируй (начинается с <code>github_pat_</code>)</li>
+          <li>Вставь сюда ↓</li>
+        </ol>
+      </details>
+      <div class="field">
+        <label>Имя автора (для подписи коммита)</label>
+        <input id="auth-name" type="text" placeholder="Например: Маша" value="">
+      </div>
+      <div class="field">
+        <label>GitHub токен</label>
+        <input id="auth-token" type="password" placeholder="github_pat_...">
+      </div>
+      <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:18px;">
+        <button class="btn btn-ghost" onclick="logout()">Выйти</button>
+        <button class="btn btn-ghost" onclick="closeAuthModal()">Отмена</button>
+        <button class="btn btn-primary" onclick="saveAuth()">Сохранить</button>
+      </div>
     </div>
   </div>
 
@@ -168,7 +205,8 @@
     <div class="status" id="status">Изменения не сохранены</div>
     <div class="actions">
       <button class="btn btn-ghost" onclick="reload()">Сбросить</button>
-      <button class="btn btn-ok" onclick="save()">Скачать site.json</button>
+      <button class="btn btn-ghost" onclick="downloadSave()" title="Скачать как файл (резервная копия)">⬇ JSON</button>
+      <button class="btn btn-ok" onclick="commitSave()">💾 Сохранить на сайт</button>
     </div>
   </div>
 </div>
@@ -295,7 +333,8 @@ function markDirty() {
   document.getElementById('status').style.color = '#FCD34D';
 }
 
-function save() {
+// === Скачать как файл (резервный вариант) ===
+function downloadSave() {
   const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -304,8 +343,109 @@ function save() {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
-  document.getElementById('status').textContent = 'Скачано · замените content/site.json';
+  document.getElementById('status').textContent = 'Скачано · положи в content/site.json';
   document.getElementById('status').style.color = '#10B981';
+}
+
+// === Авторизация ===
+const REPO = 'antonkuzmenkov/moyvedi';
+const FILE_PATH = 'content/site.json';
+const BRANCH = 'master';
+
+function getToken() { return localStorage.getItem('vedi_gh_token'); }
+function getAuthorName() { return localStorage.getItem('vedi_gh_name') || 'CMS'; }
+
+function refreshAuthStatus() {
+  const el = document.getElementById('auth-status');
+  if (!el) return;
+  el.textContent = getToken() ? `✓ ${getAuthorName()}` : 'Войти';
+}
+
+function openAuthModal() {
+  document.getElementById('auth-token').value = getToken() || '';
+  document.getElementById('auth-name').value = getAuthorName() === 'CMS' ? '' : getAuthorName();
+  document.getElementById('auth-modal').style.display = 'flex';
+}
+function closeAuthModal() {
+  document.getElementById('auth-modal').style.display = 'none';
+}
+function saveAuth() {
+  const token = document.getElementById('auth-token').value.trim();
+  const name = document.getElementById('auth-name').value.trim();
+  if (!token) { alert('Введи токен'); return; }
+  if (!name) { alert('Введи имя'); return; }
+  localStorage.setItem('vedi_gh_token', token);
+  localStorage.setItem('vedi_gh_name', name);
+  refreshAuthStatus();
+  closeAuthModal();
+}
+function logout() {
+  if (!confirm('Выйти и удалить токен из браузера?')) return;
+  localStorage.removeItem('vedi_gh_token');
+  localStorage.removeItem('vedi_gh_name');
+  refreshAuthStatus();
+  closeAuthModal();
+}
+
+// === Коммит в GitHub ===
+async function commitSave() {
+  const token = getToken();
+  if (!token) {
+    alert('Сначала войди в систему — нажми «🔑 Войти».');
+    openAuthModal();
+    return;
+  }
+  const status = document.getElementById('status');
+  status.textContent = '⏳ Сохраняю на сайт...';
+  status.style.color = '#FCD34D';
+
+  try {
+    // 1. Получить текущий sha файла
+    const cur = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (!cur.ok) {
+      const err = await cur.json().catch(() => ({}));
+      if (cur.status === 401) throw new Error('Токен неверный или истёк. Войди заново.');
+      if (cur.status === 404) throw new Error('Не нашёл файл — проверь права токена на репозиторий moyvedi.');
+      throw new Error(err.message || `GitHub error ${cur.status}`);
+    }
+    const curJson = await cur.json();
+
+    // 2. Подготовить контент в base64 (с поддержкой Unicode)
+    const json = JSON.stringify(DATA, null, 2);
+    const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(json)));
+
+    // 3. PUT новый контент
+    const author = getAuthorName();
+    const ts = new Date().toISOString().replace('T', ' ').slice(0, 16);
+    const put = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `cms: ${author} обновил контент (${ts})`,
+        content: b64,
+        sha: curJson.sha,
+        branch: BRANCH
+      })
+    });
+    if (!put.ok) {
+      const err = await put.json().catch(() => ({}));
+      throw new Error(err.message || `GitHub error ${put.status}`);
+    }
+    const putJson = await put.json();
+
+    status.innerHTML = `✅ Сохранено · сайт обновится через 1–2 мин · <a href="${putJson.commit.html_url}" target="_blank" style="color:#fff;text-decoration:underline;">коммит</a>`;
+    status.style.color = '#10B981';
+  } catch (e) {
+    console.error(e);
+    status.textContent = '❌ Ошибка: ' + e.message;
+    status.style.color = '#F87171';
+  }
 }
 
 function reload() { load(); }
@@ -382,6 +522,7 @@ function exportLeads() {
 }
 
 load();
+refreshAuthStatus();
 </script>
 </body>
 </html>
