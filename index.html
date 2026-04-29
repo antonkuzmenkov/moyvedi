@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#4F46E5">
-<title>Веди — лекарство от одиночества | Цифровой компаньон 75+</title>
-<meta name="description" content="Не планшет. Внук, который звонит каждый день. Живой оператор, цифровая память клиента и связь с семьёй через MAX. Для одиноких пожилых 75+.">
-<meta name="keywords" content="одиночество пожилых, цифровой компаньон, забота 75+, операторы видеозвонки, MAX мессенджер, ФЗ-152">
+<title>Веди — лекарство от одиночества | WHO 2024: одиночество как диагноз</title>
+<meta name="description" content="Одиночество в 75+ — кризис здоровья, признанный ВОЗ: ×2 депрессия, +32% инсульт, +29% коронарная болезнь. Веди — живой оператор-«внук», карточка из 5 600 фактов, связь с семьёй через MAX.">
+<meta name="keywords" content="одиночество пожилых, лечение одиночества, UCLA Loneliness Scale, цифровой компаньон, eldertech РФ, WHO Social Connection">
 <meta name="author" content="Веди">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://moyvedi.ru/">
@@ -334,6 +334,57 @@
   .tariff.popular .btn { background: #fff; color: var(--indigo-600); }
   .tariff.popular .btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); }
 
+  /* Impact section */
+  .impact-bg { background: linear-gradient(180deg, transparent 0%, rgba(220,252,231,0.35) 50%, transparent 100%); }
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .impact-card {
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.85); border-radius: 28px; padding: 40px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .impact-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #10B981 0%, #14B8A6 50%, #06B6D4 100%);
+  }
+  .impact-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -16px rgba(16,185,129,0.22); }
+  .impact-card .v {
+    font-family: var(--font-display); font-weight: 800; font-size: 56px;
+    background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+    letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px;
+  }
+  .impact-card .l { font-family: var(--font-display); font-weight: 700; color: var(--indigo-950); font-size: 18px; margin-bottom: 14px; }
+  .impact-card p { font-size: 15px; color: var(--fg-2); line-height: 1.55; margin: 0; }
+
+  /* Team section */
+  .team-bg { background: linear-gradient(180deg, transparent 0%, rgba(238,232,248,0.4) 50%, transparent 100%); }
+  .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 980px; margin: 0 auto; }
+  .member {
+    background: rgba(255,255,255,0.78); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.85); border-radius: 24px; padding: 32px;
+    display: flex; gap: 22px; align-items: flex-start; transition: all 0.25s;
+  }
+  .member:hover { transform: translateY(-4px); border-color: rgba(79,70,229,0.18); box-shadow: 0 20px 40px -16px rgba(79,70,229,0.18); }
+  .member .ava {
+    width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 22px; color: #fff;
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
+    letter-spacing: -0.02em;
+  }
+  .member:nth-child(2) .ava { background: linear-gradient(135deg, #EC4899 0%, #BE185D 100%); }
+  .member:nth-child(3) .ava { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+  .member:nth-child(4) .ava { background: linear-gradient(135deg, #10B981 0%, #0F766E 100%); }
+  .member .info h3 { font-family: var(--font-display); font-weight: 800; color: var(--indigo-950); font-size: 19px; margin: 0 0 4px; }
+  .member .info .role { font-size: 13px; color: var(--indigo-600); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 12px; }
+  .member .info p { font-size: 14px; color: var(--fg-2); line-height: 1.55; margin: 0; }
+  .hiring {
+    max-width: 820px; margin: 56px auto 0;
+    background: rgba(255,255,255,0.65); border-radius: 24px; padding: 32px 36px;
+    border: 1px dashed rgba(79,70,229,0.25);
+  }
+  .hiring h3 { font-family: var(--font-display); font-weight: 800; color: var(--indigo-950); font-size: 18px; margin: 0 0 16px; }
+  .hiring ul { margin: 0; padding-left: 20px; color: var(--fg-2); font-size: 15px; line-height: 1.7; }
+
   /* FAQ */
   .faq-list { max-width: 820px; margin: 0 auto; }
   .faq-item {
@@ -444,7 +495,8 @@
   @media (max-width: 960px) {
     .hero-grid { grid-template-columns: 1fr; gap: 60px; }
     .hero-meta { max-width: 100%; }
-    .three, .flows, .tariffs, .stats-grid, .steps { grid-template-columns: 1fr; }
+    .three, .flows, .tariffs, .stats-grid, .steps, .impact-grid, .team-grid { grid-template-columns: 1fr; }
+    .member { flex-direction: column; gap: 14px; }
     .tariff.popular { transform: scale(1); }
     .tariff.popular:hover { transform: translateY(-6px); }
     nav { display: none; }
@@ -482,8 +534,9 @@
       <ul>
         <li><a href="#problem">Проблема</a></li>
         <li><a href="#solution">Решение</a></li>
-        <li><a href="#how">Как работает</a></li>
+        <li><a href="#impact">Эффект</a></li>
         <li><a href="#tariffs">Тарифы</a></li>
+        <li><a href="#team">Команда</a></li>
         <li><a href="#faq">Вопросы</a></li>
       </ul>
     </nav>
@@ -496,17 +549,17 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow" id="eyebrow-hero">Цифровой компаньон 75+</span>
-      <h1 id="hero-title">Не планшет.<br><span class="em" id="hero-accent">Внук, который звонит каждый день.</span></h1>
-      <p class="lead" id="hero-lead">Живой оператор-«внук», цифровая память клиента и связь с семьёй через MAX. Одна кнопка «Свои» → видеозвонок за 4 секунды. Для одиноких пожилых 75+.</p>
+      <span class="eyebrow" id="eyebrow-hero">Лекарство от одиночества</span>
+      <h1 id="hero-title">Одиночество — это<br><span class="em" id="hero-accent">лечимый недуг.</span></h1>
+      <p class="lead" id="hero-lead">Веди — живой оператор-«внук», цифровая память клиента и связь с семьёй через MAX. Одна кнопка «Свои» → видеозвонок за 4 секунды. Для 6–7 млн одиноких пожилых в России.</p>
       <div class="hero-ctas">
         <button class="btn btn-gradient" data-open-modal>Подобрать тариф</button>
         <a href="#how" class="btn btn-ghost">Как это работает</a>
       </div>
       <div class="hero-meta" id="hero-metrics">
-        <div><b>6–7 млн</b>одиноко проживающих 75+ в РФ</div>
-        <div><b>0</b>прямых аналогов в России</div>
-        <div><b>5 600</b>фактов в карточке клиента</div>
+        <div><b>−30%</b>UCLA Loneliness Scale за 90 дней</div>
+        <div><b>−18%</b>вызовов скорой через 6 мес</div>
+        <div><b>120 тыс ₽</b>экономия городу на 1 клиенте/год</div>
       </div>
     </div>
     <div>
@@ -537,8 +590,8 @@
 <section class="trust-strip" aria-label="Доверие и безопасность">
   <div class="wrap">
     <div class="trust-pill"><span class="ico">🇷🇺</span>Серверы в РФ · ФЗ-152</div>
-    <div class="trust-pill"><span class="ico">🔒</span>E2E-шифрование звонков</div>
-    <div class="trust-pill"><span class="ico">📋</span>Уведомление РКН подано</div>
+    <div class="trust-pill"><span class="ico">🩺</span>WHO 2024: одиночество — диагноз</div>
+    <div class="trust-pill"><span class="ico">🤝</span>Партнёры: Тимченко, АСИ, ДТСЗН</div>
     <div class="trust-pill"><span class="ico">⏱</span>SOS — 5 минут до куратора</div>
   </div>
 </section>
@@ -547,26 +600,26 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" id="eyebrow-problem">Проблема</span>
-      <h2 id="problem-title">Одиночество 75+ — кризис здоровья, а не «социальный дискомфорт»</h2>
+      <h2 id="problem-title">Одиночество в 75+ — это кризис здоровья, признанный ВОЗ</h2>
     </div>
     <div class="stats-grid reveal" id="problem-stats">
-      <div class="stat-card">
-        <div class="v">+32%</div>
-        <div class="l">риск инсульта у одиноких пожилых</div>
-        <div class="s">WHO 2024</div>
-      </div>
       <div class="stat-card">
         <div class="v">×2</div>
         <div class="l">риск депрессии при социальной изоляции</div>
         <div class="s">WHO 2024</div>
       </div>
       <div class="stat-card">
-        <div class="v">42%</div>
-        <div class="l">домохозяйств РФ — одиночные</div>
-        <div class="s">Росстат, перепись 2021</div>
+        <div class="v">+32%</div>
+        <div class="l">риск инсульта у одиноких пожилых</div>
+        <div class="s">WHO 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="v">+29%</div>
+        <div class="l">риск коронарной болезни сердца</div>
+        <div class="s">WHO 2024</div>
       </div>
     </div>
-    <p class="problem-summary reveal" id="problem-summary">Дети звонят 2–3 раза в неделю по 5–10 минут. Соцслужбы перегружены: очередь 3–6 мес. ДМС не берёт после 70–75 лет. «Московское долголетие» офлайн — недоступно маломобильным. Сиделки 50–70 тыс ₽/мес для большинства неподъёмно.</p>
+    <p class="problem-summary reveal" id="problem-summary">6–7 млн одиноких пожилых в РФ, 850 тыс в Москве. 42% домохозяйств — одиночные (рост 22% за 20 лет). Дети звонят 2–3 раза в неделю по 5–10 минут. Соцслужбы перегружены: очередь 3–6 мес. ДМС не берёт после 70–75 лет. Сиделки 50–70 тыс ₽/мес — большинству неподъёмно. Никто в РФ не закрывает «компаньон + здоровье + семья» в одном продукте.</p>
   </div>
 </section>
 
@@ -619,6 +672,33 @@
         <div class="num">3</div>
         <h3>Первый разговор</h3>
         <p>Через 1–2 дня — первый видеозвонок от «внука». Дальше 2–4 раза в неделю по графику. Семья видит ленту в MAX.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="impact-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-impact">Социальный эффект</span>
+      <h2 id="impact-title">Одиночество измеримо — и измеримо лечится</h2>
+      <p id="impact-lead">Мы не «развлекаем дедушек». Мы возвращаем им контакт с миром, и это видно по медицинским и бюджетным метрикам.</p>
+    </div>
+    <div class="impact-grid reveal" id="impact-grid">
+      <div class="impact-card">
+        <div class="v">−30%</div>
+        <div class="l">UCLA Loneliness Scale</div>
+        <p>Клинически валидный показатель ВОЗ. Снижение через 90 дней использования — целевой результат пилота с РНИМУ Пирогова.</p>
+      </div>
+      <div class="impact-card">
+        <div class="v">−18%</div>
+        <div class="l">Вызовы скорой</div>
+        <p>Снижение обращений к ПМСП у клиентов через 6 месяцев. По аналогии с Papa (US, $250M ARR), валидируем в Phase 2 в Москве.</p>
+      </div>
+      <div class="impact-card">
+        <div class="v">120 тыс ₽</div>
+        <div class="l">Экономия городу</div>
+        <p>На 1 клиента в год: меньше госпитализаций + соцработник освобождён для лежачих. К 2028 — 1 500 семей без увольнения работающих детей.</p>
       </div>
     </div>
   </div>
@@ -727,6 +807,59 @@
         <div class="tariff-trial">Для программ «забота о родителях»</div>
         <button class="btn btn-ghost" data-open-modal data-plan="Корпорат" style="margin-top: 16px;">Связаться</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="team-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-team">Команда</span>
+      <h2 id="team-title">Кто за этим стоит</h2>
+      <p id="team-lead">Один tech-фаундер + AI Pipeline v3 (10 авто-контролёров кода 24/7) = эквивалент команды разработки 6–8 человек. Плюс эксперты в социологии и аналитике.</p>
+    </div>
+    <div class="team-grid reveal" id="team-grid">
+      <div class="member">
+        <div class="ava">АК</div>
+        <div class="info">
+          <h3>Антон Кузменков</h3>
+          <div class="role">Founder &amp; CEO · Tech Lead</div>
+          <p>18+ лет в разработке, ex-tech lead в крупном финтехе. 4 года в Москве, личный опыт ухода за пожилым родственником. Автор всей кодовой базы Веди (4 приложения, 65+ REST endpoints).</p>
+        </div>
+      </div>
+      <div class="member">
+        <div class="ava">НП</div>
+        <div class="info">
+          <h3>Наталья Позднева</h3>
+          <div class="role">Главный аналитик</div>
+          <p>Глубокий разбор рынка eldertech и конкурентов (Papa, ElliQ, GrandPad). Анализ unit-экономики, валидация стратегии выхода в B2B-каналы (ДТСЗН, страховые).</p>
+        </div>
+      </div>
+      <div class="member">
+        <div class="ava">АК</div>
+        <div class="info">
+          <h3>Алёна Кузменкова</h3>
+          <div class="role">Маркетолог-социолог</div>
+          <p>Качественные интервью с ЦА — каркас 12 сценариев (одинокий пожилой, caregiver 50 лет, семья). Tone of voice, позиционирование, диалог с пожилой аудиторией.</p>
+        </div>
+      </div>
+      <div class="member">
+        <div class="ava">AI</div>
+        <div class="info">
+          <h3>AI Pipeline v3</h3>
+          <div class="role">10 авто-контролёров кода</div>
+          <p>Работает 24/7. Контроль качества, безопасности, регресс-тестов, документации. Скорость вывода фич × 5 vs стандартная команда. Эквивалент команды 6–8 разработчиков.</p>
+        </div>
+      </div>
+    </div>
+    <div class="hiring reveal">
+      <h3>Открыты позиции (Phase 1, до Q2 2026)</h3>
+      <ul>
+        <li>COO — операционка, найм, compliance · приоритет №1</li>
+        <li>Field-tech Москва — установка планшетов и поддержка</li>
+        <li>6–8 операторов-компаньонов — частичная занятость, проверка по 161-ФЗ</li>
+        <li>Head of Care — клинический методолог, gerontolog (эдвайзер от РНИМУ Пирогова)</li>
+      </ul>
     </div>
   </div>
 </section>
