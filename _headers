@@ -1,0 +1,24 @@
+# Cloudflare Pages headers
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private, no-cache
+
+/content/*
+  Cache-Control: public, max-age=300
+  Access-Control-Allow-Origin: *
+
+/assets/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.css
+  Cache-Control: public, max-age=86400
+
+/*.html
+  Cache-Control: public, max-age=300

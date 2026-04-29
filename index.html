@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4F46E5">
+<title>Веди — лекарство от одиночества | Цифровой компаньон 75+</title>
+<meta name="description" content="Не планшет. Внук, который звонит каждый день. Живой оператор, цифровая память клиента и связь с семьёй через MAX. Для одиноких пожилых 75+.">
+<meta name="keywords" content="одиночество пожилых, цифровой компаньон, забота 75+, операторы видеозвонки, MAX мессенджер, ФЗ-152">
+<meta name="author" content="Веди">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vedi.app/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Веди">
+<meta property="og:title" content="Веди — лекарство от одиночества">
+<meta property="og:description" content="Цифровой компаньон 75+. Живой оператор-«внук», 5 600 фактов о клиенте, связь с семьёй через MAX.">
+<meta property="og:image" content="https://vedi.app/assets/og-image.png">
+<meta property="og:url" content="https://vedi.app/">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Веди — лекарство от одиночества">
+<meta name="twitter:description" content="Цифровой компаньон 75+. Живой оператор, цифровая память, связь с семьёй.">
+<meta name="twitter:image" content="https://vedi.app/assets/og-image.png">
+
+<link rel="icon" type="image/png" href="assets/owl-logo-small.png">
+<link rel="apple-touch-icon" href="assets/owl-logo-small.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="colors_and_type.css">
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Веди",
+  "url": "https://vedi.app",
+  "logo": "https://vedi.app/assets/owl-logo.png",
+  "description": "Цифровой компаньон для одиноких пожилых 75+: живой оператор, цифровая память клиента, связь с семьёй через MAX.",
+  "email": "antonkuzmenkov@gmail.com",
+  "sameAs": [],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "RU",
+    "addressLocality": "Москва"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --warm-cream: #FAF7F5;
+    --warm-peach: #FDF4F0;
+    --soft-rose: #FCE7E1;
+    --gold-soft: #FCD34D;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--warm-cream); font-family: var(--font-body); color: var(--fg-2); overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+  body.modal-open { overflow: hidden; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* Skip link for accessibility */
+  .skip-link { position: absolute; top: -40px; left: 12px; background: var(--indigo-600); color: #fff; padding: 8px 14px; border-radius: 8px; z-index: 1000; transition: top 0.2s; }
+  .skip-link:focus { top: 12px; }
+
+  /* Animated background blobs */
+  .bg-blob {
+    position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.35;
+    pointer-events: none; z-index: 0; animation: float 20s ease-in-out infinite;
+  }
+  .blob-1 { width: 600px; height: 600px; background: #C7D2FE; top: -200px; left: -200px; animation-delay: 0s; }
+  .blob-2 { width: 500px; height: 500px; background: #FBCFE8; top: 30%; right: -150px; animation-delay: -8s; }
+  .blob-3 { width: 450px; height: 450px; background: #DDD6FE; bottom: -150px; left: 30%; animation-delay: -14s; }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.05); }
+    66% { transform: translate(-20px, 30px) scale(0.95); }
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* Header glassmorphism */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250, 247, 245, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(79, 70, 229, 0.08);
+  }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; border: none; }
+  .logo img { width: 40px; height: 40px; }
+  .logo .name { font-family: var(--font-display); font-weight: 800; color: var(--indigo-950); font-size: 22px; letter-spacing: -0.02em; }
+  nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+  nav a { font-size: 15px; color: var(--fg-2); border: none; font-weight: 500; transition: color 0.2s; }
+  nav a:hover { color: var(--indigo-600); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 14px;
+    font-family: var(--font-body); font-weight: 600; font-size: 15px; cursor: pointer; border: none;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1); text-decoration: none; white-space: nowrap;
+  }
+  .btn:focus-visible { outline: 3px solid rgba(79,70,229,0.4); outline-offset: 2px; }
+  .btn-primary { background: var(--indigo-600); color: #fff; }
+  .btn-primary:hover { background: #4338CA; transform: translateY(-2px); box-shadow: 0 12px 32px -10px rgba(79,70,229,0.4); }
+  .btn-gradient {
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 50%, #3B82F6 100%);
+    color: #fff; padding: 16px 30px; font-size: 16px;
+    box-shadow: 0 16px 40px -12px rgba(124,58,237,0.45);
+    background-size: 200% 200%; transition: all 0.3s;
+  }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 24px 56px -12px rgba(124,58,237,0.55); background-position: right center; }
+  .btn-ghost { background: rgba(255,255,255,0.6); backdrop-filter: blur(8px); color: var(--indigo-950); border: 1px solid rgba(79,70,229,0.18); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.9); border-color: var(--indigo-600); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .bg-blob { animation: none; }
+  }
+
+  /* Hero */
+  .hero { padding: 100px 0 120px; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+    color: var(--indigo-600); border: 1px solid rgba(79,70,229,0.15);
+    font-size: 13px; font-weight: 600; margin-bottom: 28px; letter-spacing: 0.02em;
+  }
+  .eyebrow::before { content: ''; width: 6px; height: 6px; background: #10B981; border-radius: 50%; box-shadow: 0 0 0 4px rgba(16,185,129,0.2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 4px rgba(16,185,129,0.2); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } }
+
+  h1 {
+    font-family: var(--font-display); font-size: clamp(40px, 5.5vw, 72px); line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--indigo-950); font-weight: 800; margin: 0 0 28px; text-wrap: balance;
+  }
+  h1 .em { color: #4F46E5; background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 50%, #3B82F6 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) { h1 .em { color: #4F46E5; -webkit-text-fill-color: #4F46E5; background: none; } }
+  .hero p.lead { font-size: 21px; color: var(--fg-2); margin-bottom: 36px; max-width: 540px; line-height: 1.5; font-weight: 400; }
+  .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero-meta { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 540px; }
+  .hero-meta div { font-size: 13px; color: var(--slate-500); line-height: 1.4; }
+  .hero-meta b {
+    font-family: var(--font-display); font-weight: 800; font-size: 28px; display: block;
+    background: linear-gradient(135deg, #4F46E5 0%, #3B82F6 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+    letter-spacing: -0.02em; margin-bottom: 4px;
+  }
+
+  /* Device mock */
+  .device-wrap { position: relative; padding: 40px; }
+  .device-wrap::before {
+    content: ''; position: absolute; inset: 0; border-radius: 40px;
+    background: radial-gradient(circle at 50% 50%, rgba(124,58,237,0.15) 0%, transparent 70%);
+    z-index: -1;
+  }
+  .device {
+    aspect-ratio: 3 / 4; max-width: 400px; margin: 0 auto; border-radius: 40px;
+    background: linear-gradient(180deg, #1E1B4B 0%, #0F172A 100%); padding: 14px;
+    box-shadow: 0 50px 100px -25px rgba(30,27,75,0.5), 0 20px 50px -10px rgba(124,58,237,0.3);
+    transform: rotate(-2deg) translateY(0); position: relative;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .device:hover { transform: rotate(0deg) translateY(-8px); }
+  .device::before {
+    content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;
+  }
+  .screen {
+    background: #FAF7F5; border-radius: 28px; height: 100%;
+    padding: 18px; display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+  }
+  .screen-head { display: flex; align-items: center; gap: 10px; padding: 6px 8px; }
+  .screen-head img { width: 28px; height: 28px; }
+  .screen-head .t { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--indigo-950); }
+  .screen-head .clock { margin-left: auto; font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--slate-500); font-variant-numeric: tabular-nums; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+  .tile {
+    border-radius: 18px; padding: 12px; color: #fff;
+    display: flex; flex-direction: column; justify-content: space-between;
+    font-family: var(--font-display); font-weight: 700; font-size: 15px;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+  }
+  .tile .c { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+  .tile .role { font-size: 11px; font-weight: 500; opacity: 0.85; margin-top: 2px; }
+  .tile-action {
+    background: linear-gradient(135deg, #4F46E5 0%, #3B82F6 100%);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px; border-radius: 16px; color: #fff;
+    font-family: var(--font-display); font-weight: 700; font-size: 15px;
+    box-shadow: 0 8px 20px -6px rgba(79,70,229,0.5);
+  }
+
+  /* Trust strip */
+  .trust-strip { padding: 24px 0; border-top: 1px solid rgba(79,70,229,0.08); border-bottom: 1px solid rgba(79,70,229,0.08); background: rgba(255,255,255,0.45); backdrop-filter: blur(10px); }
+  .trust-strip .wrap { display: flex; justify-content: space-around; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .trust-pill { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--fg-2); font-weight: 500; }
+  .trust-pill .ico { width: 32px; height: 32px; border-radius: 10px; background: rgba(79,70,229,0.08); color: var(--indigo-600); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+
+  /* Sections */
+  section { padding: 110px 0; position: relative; }
+  .section-head { text-align: center; max-width: 740px; margin: 0 auto 72px; }
+  .section-head .eyebrow { margin-bottom: 20px; }
+  h2 {
+    font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); line-height: 1.1; letter-spacing: -0.025em;
+    color: var(--indigo-950); margin: 0 0 20px; font-weight: 800; text-wrap: balance;
+  }
+  .section-head p { font-size: 19px; color: var(--slate-500); line-height: 1.55; margin: 0; }
+
+  /* Problem stats */
+  .problem-bg { background: linear-gradient(180deg, transparent 0%, rgba(252,231,225,0.3) 50%, transparent 100%); }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 48px; }
+  .stat-card {
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.8); border-radius: 28px; padding: 40px;
+    text-align: center; transition: all 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(124,58,237,0.2); }
+  .stat-card .v {
+    font-family: var(--font-display); font-weight: 800; font-size: 64px;
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+    letter-spacing: -0.03em; line-height: 1; margin-bottom: 12px;
+  }
+  .stat-card .l { font-size: 16px; color: var(--fg-2); line-height: 1.4; margin-bottom: 8px; }
+  .stat-card .s { font-size: 12px; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .problem-summary { max-width: 820px; margin: 0 auto; text-align: center; font-size: 18px; color: var(--fg-2); line-height: 1.6; }
+
+  /* Three layers */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .layer {
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.8); border-radius: 28px; padding: 40px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .layer::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #7C3AED 0%, #4F46E5 50%, #3B82F6 100%);
+    transform: translateY(-4px); transition: transform 0.3s;
+  }
+  .layer:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -16px rgba(79,70,229,0.25); border-color: rgba(79,70,229,0.2); }
+  .layer:hover::before { transform: translateY(0); }
+  .layer .n {
+    font-family: var(--font-display); font-weight: 800; font-size: 12px;
+    color: var(--indigo-600); margin-bottom: 20px; letter-spacing: 0.12em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .layer .n::before { content: ''; width: 24px; height: 2px; background: var(--indigo-600); }
+  .layer h3 { font-family: var(--font-display); font-size: 26px; margin: 0 0 16px; color: var(--indigo-950); font-weight: 700; letter-spacing: -0.01em; }
+  .layer p { color: var(--fg-2); font-size: 16px; line-height: 1.6; margin: 0; }
+
+  /* Steps (3 шага начала) */
+  .steps-bg { background: linear-gradient(180deg, transparent 0%, rgba(238,232,248,0.4) 50%, transparent 100%); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .step {
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    border: 1px solid rgba(79,70,229,0.1); border-radius: 28px; padding: 40px;
+    position: relative; transition: all 0.3s;
+  }
+  .step:hover { transform: translateY(-4px); box-shadow: 0 20px 48px -16px rgba(79,70,229,0.2); }
+  .step .num {
+    position: absolute; top: -22px; left: 32px;
+    width: 56px; height: 56px; border-radius: 18px;
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%); color: #fff;
+    font-family: var(--font-display); font-weight: 800; font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 24px -8px rgba(124,58,237,0.5);
+  }
+  .step h3 { font-family: var(--font-display); font-size: 22px; margin: 16px 0 12px; color: var(--indigo-950); font-weight: 700; letter-spacing: -0.01em; }
+  .step p { color: var(--fg-2); font-size: 15px; line-height: 1.55; margin: 0; }
+
+  /* How it works */
+  .how-bg { background: linear-gradient(180deg, transparent 0%, rgba(245,243,255,0.5) 50%, transparent 100%); }
+  .flows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .flow {
+    padding: 36px; border-radius: 24px;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.8);
+  }
+  .flow-head {
+    font-family: var(--font-display); font-weight: 700; font-size: 12px;
+    color: var(--indigo-600); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px;
+    display: inline-block; padding: 6px 14px; background: rgba(79,70,229,0.08); border-radius: 999px;
+  }
+  .flow h3 { font-family: var(--font-display); font-size: 24px; margin: 0 0 20px; color: var(--indigo-950); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+  .flow ul { list-style: none; padding: 0; margin: 0; }
+  .flow li { padding: 14px 0; border-bottom: 1px dashed rgba(79,70,229,0.15); font-size: 15px; color: var(--fg-2); line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+  .flow li:last-child { border-bottom: none; }
+  .flow li::before { content: '→'; color: var(--indigo-600); font-weight: 700; flex-shrink: 0; }
+
+  /* Tariffs */
+  .tariffs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .tariff {
+    border-radius: 24px; padding: 32px;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    border: 1px solid rgba(79,70,229,0.1); position: relative;
+    transition: all 0.3s; display: flex; flex-direction: column;
+  }
+  .tariff:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -16px rgba(79,70,229,0.2); border-color: rgba(79,70,229,0.25); }
+  .tariff.popular {
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 50%, #3B82F6 100%);
+    color: #fff; border: none; box-shadow: 0 24px 56px -16px rgba(124,58,237,0.45);
+    transform: scale(1.04);
+  }
+  .tariff.popular:hover { transform: scale(1.04) translateY(-6px); box-shadow: 0 32px 64px -16px rgba(124,58,237,0.55); }
+  .tariff .ribbon {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: #fff; padding: 6px 16px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    box-shadow: 0 8px 20px -6px rgba(245,158,11,0.5);
+  }
+  .tariff-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--indigo-600); margin-bottom: 8px; }
+  .tariff.popular .tariff-name { color: rgba(255,255,255,0.85); }
+  .tariff-subname { font-size: 12px; color: var(--slate-500); margin-bottom: 14px; font-weight: 500; }
+  .tariff.popular .tariff-subname { color: rgba(255,255,255,0.7); }
+  .tariff-price { font-family: var(--font-display); font-weight: 800; font-size: 42px; color: var(--indigo-950); letter-spacing: -0.03em; line-height: 1; }
+  .tariff.popular .tariff-price { color: #fff; }
+  .tariff-period { font-size: 14px; color: var(--slate-500); font-weight: 500; margin-left: 6px; }
+  .tariff.popular .tariff-period { color: rgba(255,255,255,0.8); }
+  .tariff-trial { font-size: 13px; color: var(--slate-500); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(79,70,229,0.1); }
+  .tariff.popular .tariff-trial { color: rgba(255,255,255,0.85); border-top-color: rgba(255,255,255,0.2); }
+  .tariff ul { list-style: none; padding: 0; margin: 22px 0 26px; flex: 1; }
+  .tariff li { font-size: 14px; padding: 8px 0; color: var(--fg-2); display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; }
+  .tariff.popular li { color: rgba(255,255,255,0.92); }
+  .tariff li::before { content: '✓'; color: var(--emerald); font-weight: 700; flex-shrink: 0; }
+  .tariff.popular li::before { color: #FDE68A; }
+  .tariff .btn { width: 100%; justify-content: center; }
+  .tariff.popular .btn { background: #fff; color: var(--indigo-600); }
+  .tariff.popular .btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); }
+
+  /* FAQ */
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item {
+    padding: 24px 28px; border-radius: 20px; margin-bottom: 12px; cursor: pointer;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+    border: 1px solid rgba(79,70,229,0.08); transition: all 0.25s;
+  }
+  .faq-item:hover { border-color: rgba(79,70,229,0.2); }
+  .faq-item.open { background: rgba(255,255,255,0.92); border-color: rgba(79,70,229,0.2); }
+  .faq-q {
+    font-family: var(--font-display); font-weight: 700; color: var(--indigo-950); font-size: 18px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; line-height: 1.3;
+  }
+  .faq-a { font-size: 16px; color: var(--fg-2); margin-top: 14px; line-height: 1.6; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item .chev { transition: transform 0.25s; color: var(--slate-500); flex-shrink: 0; font-size: 14px; }
+  .faq-item.open .chev { transform: rotate(180deg); color: var(--indigo-600); }
+
+  /* CTA band */
+  .cta-band {
+    padding: 100px 0; text-align: center; color: #fff; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #1E1B4B 0%, #4F46E5 50%, #7C3AED 100%);
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(124,58,237,0.4) 0%, transparent 50%);
+  }
+  .cta-band > .wrap { position: relative; z-index: 1; }
+  .cta-band h2 { color: #fff; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; }
+  .cta-band p { color: rgba(255,255,255,0.85); margin: 0 0 32px; font-size: 19px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta-band .btn { background: #fff; color: var(--indigo-600); padding: 16px 36px; font-size: 16px; }
+  .cta-band .btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); box-shadow: 0 16px 32px -8px rgba(0,0,0,0.3); }
+
+  /* Footer */
+  footer { padding: 56px 0 40px; background: var(--indigo-950); color: rgba(255,255,255,0.6); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  footer .logo .name { color: #fff; }
+  footer a { color: rgba(255,255,255,0.6); border: none; transition: color 0.2s; }
+  footer a:hover { color: #fff; }
+  footer ul { list-style: none; display: flex; gap: 32px; padding: 0; margin: 0; flex-wrap: wrap; }
+  .copyright { font-size: 13px; opacity: 0.5; width: 100%; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 24px; text-align: center; }
+
+  /* Modal — заявка */
+  .modal-back {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(30,27,75,0.55); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .modal-back.show { display: flex; opacity: 1; }
+  .modal {
+    background: #fff; border-radius: 24px; max-width: 480px; width: 100%;
+    padding: 36px; box-shadow: 0 40px 80px -20px rgba(30,27,75,0.5);
+    max-height: 92vh; overflow-y: auto;
+    transform: translateY(20px); transition: transform 0.3s;
+  }
+  .modal-back.show .modal { transform: translateY(0); }
+  .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .modal h3 { font-family: var(--font-display); font-size: 26px; color: var(--indigo-950); margin: 0; letter-spacing: -0.02em; line-height: 1.2; }
+  .modal-close { background: rgba(79,70,229,0.08); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; color: var(--indigo-950); font-size: 20px; transition: all 0.2s; flex-shrink: 0; }
+  .modal-close:hover { background: rgba(79,70,229,0.15); transform: rotate(90deg); }
+  .modal-desc { color: var(--slate-500); font-size: 14px; margin: 6px 0 22px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .field input, .field textarea, .field select {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 14px; border-radius: 12px;
+    border: 1px solid rgba(79,70,229,0.15);
+    font-family: var(--font-body); font-size: 15px; color: var(--indigo-950);
+    background: #FCFBFA; transition: all 0.2s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none; border-color: var(--indigo-600); background: #fff;
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+  }
+  .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .field .err { color: #DC2626; font-size: 12px; margin-top: 4px; display: none; }
+  .field.err input, .field.err textarea, .field.err select { border-color: #DC2626; }
+  .field.err .err { display: block; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--slate-500); line-height: 1.4; margin-bottom: 18px; }
+  .consent input { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--indigo-600); }
+  .consent a { color: var(--indigo-600); border-bottom: 1px dashed currentColor; }
+  .modal-submit { width: 100%; justify-content: center; padding: 14px; }
+  .modal-success { text-align: center; padding: 16px 0; display: none; }
+  .modal-success.show { display: block; }
+  .modal-form.hide { display: none; }
+  .modal-success .ico { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg,#10B981,#059669); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 18px; box-shadow: 0 16px 32px -8px rgba(16,185,129,0.4); }
+  .modal-success h3 { color: var(--indigo-950); margin-bottom: 12px; }
+  .modal-success p { color: var(--fg-2); font-size: 15px; line-height: 1.5; }
+
+  /* Cookie banner */
+  .cookie-banner {
+    position: fixed; bottom: 16px; left: 16px; right: 16px;
+    max-width: 520px; margin: 0 auto;
+    background: rgba(30,27,75,0.96); backdrop-filter: blur(20px);
+    color: #fff; padding: 16px 20px; border-radius: 16px;
+    box-shadow: 0 24px 48px -12px rgba(0,0,0,0.3);
+    z-index: 999; display: none; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .cookie-banner.show { display: flex; }
+  .cookie-banner p { margin: 0; font-size: 13px; line-height: 1.5; flex: 1; min-width: 200px; }
+  .cookie-banner a { color: rgba(255,255,255,0.8); border-bottom: 1px dashed currentColor; }
+  .cookie-banner button { background: #fff; color: var(--indigo-950); border: none; padding: 8px 18px; border-radius: 10px; font-family: var(--font-body); font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+  .cookie-banner button:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .hero-meta { max-width: 100%; }
+    .three, .flows, .tariffs, .stats-grid, .steps { grid-template-columns: 1fr; }
+    .tariff.popular { transform: scale(1); }
+    .tariff.popular:hover { transform: translateY(-6px); }
+    nav { display: none; }
+    section { padding: 70px 0; }
+    .hero { padding: 60px 0 80px; }
+    .device-wrap { padding: 20px; }
+    .trust-strip .wrap { justify-content: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 20px; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .hero p.lead { font-size: 18px; }
+    footer .wrap { flex-direction: column; text-align: center; }
+    .modal { padding: 24px; border-radius: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">К основному содержанию</a>
+
+<!-- Animated background -->
+<div class="bg-blob blob-1" aria-hidden="true"></div>
+<div class="bg-blob blob-2" aria-hidden="true"></div>
+<div class="bg-blob blob-3" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Веди — на главную">
+      <img src="assets/owl-logo.png" alt="" width="40" height="40">
+      <span class="name">Веди</span>
+    </a>
+    <nav aria-label="Главное меню">
+      <ul>
+        <li><a href="#problem">Проблема</a></li>
+        <li><a href="#solution">Решение</a></li>
+        <li><a href="#how">Как работает</a></li>
+        <li><a href="#tariffs">Тарифы</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+      </ul>
+    </nav>
+    <button class="btn btn-primary" data-open-modal aria-haspopup="dialog">Оставить заявку</button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" id="eyebrow-hero">Цифровой компаньон 75+</span>
+      <h1 id="hero-title">Не планшет.<br><span class="em" id="hero-accent">Внук, который звонит каждый день.</span></h1>
+      <p class="lead" id="hero-lead">Живой оператор-«внук», цифровая память клиента и связь с семьёй через MAX. Одна кнопка «Свои» → видеозвонок за 4 секунды. Для одиноких пожилых 75+.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-gradient" data-open-modal>Подобрать тариф</button>
+        <a href="#how" class="btn btn-ghost">Как это работает</a>
+      </div>
+      <div class="hero-meta" id="hero-metrics">
+        <div><b>6–7 млн</b>одиноко проживающих 75+ в РФ</div>
+        <div><b>0</b>прямых аналогов в России</div>
+        <div><b>5 600</b>фактов в карточке клиента</div>
+      </div>
+    </div>
+    <div>
+      <div class="device-wrap">
+        <div class="device" aria-hidden="true">
+          <div class="screen">
+            <div class="screen-head">
+              <img src="assets/owl-logo.png" alt="">
+              <div class="t">Веди</div>
+              <div class="clock" id="clock">14:32</div>
+            </div>
+            <div class="tiles">
+              <div class="tile" style="background:linear-gradient(135deg,#14B8A6,#0F766E)"><div class="c">С</div><div>Саша<div class="role">внук</div></div></div>
+              <div class="tile" style="background:linear-gradient(135deg,#EC4899,#BE185D)"><div class="c">Л</div><div>Лена<div class="role">дочь</div></div></div>
+              <div class="tile" style="background:linear-gradient(135deg,#A855F7,#7E22CE)"><div class="c">К</div><div>Катя<div class="role">внучка</div></div></div>
+              <div class="tile" style="background:linear-gradient(135deg,#22C55E,#15803D)"><div class="c">⚕</div><div>Врач<div class="role">пол. №4</div></div></div>
+            </div>
+            <div class="tile-action">
+              <span style="font-size:18px">●</span> Свои
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip" aria-label="Доверие и безопасность">
+  <div class="wrap">
+    <div class="trust-pill"><span class="ico">🇷🇺</span>Серверы в РФ · ФЗ-152</div>
+    <div class="trust-pill"><span class="ico">🔒</span>E2E-шифрование звонков</div>
+    <div class="trust-pill"><span class="ico">📋</span>Уведомление РКН подано</div>
+    <div class="trust-pill"><span class="ico">⏱</span>SOS — 5 минут до куратора</div>
+  </div>
+</section>
+
+<section id="problem" class="problem-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-problem">Проблема</span>
+      <h2 id="problem-title">Одиночество 75+ — кризис здоровья, а не «социальный дискомфорт»</h2>
+    </div>
+    <div class="stats-grid reveal" id="problem-stats">
+      <div class="stat-card">
+        <div class="v">+32%</div>
+        <div class="l">риск инсульта у одиноких пожилых</div>
+        <div class="s">WHO 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="v">×2</div>
+        <div class="l">риск депрессии при социальной изоляции</div>
+        <div class="s">WHO 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="v">42%</div>
+        <div class="l">домохозяйств РФ — одиночные</div>
+        <div class="s">Росстат, перепись 2021</div>
+      </div>
+    </div>
+    <p class="problem-summary reveal" id="problem-summary">Дети звонят 2–3 раза в неделю по 5–10 минут. Соцслужбы перегружены: очередь 3–6 мес. ДМС не берёт после 70–75 лет. «Московское долголетие» офлайн — недоступно маломобильным. Сиделки 50–70 тыс ₽/мес для большинства неподъёмно.</p>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-layers">Как устроено</span>
+      <h2 id="layers-title">Три слоя, которые работают вместе</h2>
+      <p id="layers-lead">Мы продаём отношения, а не технологию. Сначала — живой человек. Потом цифровая память в помощь оператору.</p>
+    </div>
+    <div class="three reveal" id="layers-grid">
+      <div class="layer">
+        <div class="n">Слой 1</div>
+        <h3>Живой оператор-«внук»</h3>
+        <p>Реальный человек, прошедший обучение 40 часов. Видеозвонки 2–4 раза в неделю по 15 минут. Тот же голос, то же имя, каждый звонок. Не колл-центр, не бот, не робот.</p>
+      </div>
+      <div class="layer">
+        <div class="n">Слой 2</div>
+        <h3>Цифровая память</h3>
+        <p>Карточка клиента на 5 600 фактов: здоровье, семья, привычки, тревоги, дни рождения внуков. Невидимо подсказывает оператору red-flags и темы. Полностью локально, без внешних сервисов.</p>
+      </div>
+      <div class="layer">
+        <div class="n">Слой 3</div>
+        <h3>MAX и помощь</h3>
+        <p>Семья шлёт фото и звонит через MAX — пожилой не учит новое. SOS-эскалация ≤5 мин до куратора и семьи. Партнёры: аптека, доставка, выездной мастер, сиделка.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="steps" class="steps-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Как начать</span>
+      <h2>Три шага до первого звонка</h2>
+      <p>От заявки до знакомства с «внуком» — обычно 5–7 дней.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Заявка и звонок</h3>
+        <p>Оставьте заявку — мы перезвоним в течение часа в рабочее время. Расскажем, как всё устроено, без давления и подписки.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Знакомство и доставка</h3>
+        <p>Подбираем оператора по характеру и интересам. Привозим планшет домой и помогаем настроить за 20 минут.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Первый разговор</h3>
+        <p>Через 1–2 дня — первый видеозвонок от «внука». Дальше 2–4 раза в неделю по графику. Семья видит ленту в MAX.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="how-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-how">Кто что видит</span>
+      <h2 id="how-title">Один сервис — три роли</h2>
+      <p id="how-lead">Пожилой видит простой планшет. Семья видит ленту активности. Оператор видит всю историю.</p>
+    </div>
+    <div class="flows reveal" id="flows-grid">
+      <div class="flow">
+        <div class="flow-head">Пожилой</div>
+        <h3>Одна кнопка — живой человек</h3>
+        <ul>
+          <li>Кнопка «Свои» → видеозвонок оператору за 4 секунды</li>
+          <li>Фоторамка 24/7 — семейные фото, часы 64sp</li>
+          <li>SOS — мгновенная связь с куратором</li>
+          <li>Без меню, без магазинов, без настроек</li>
+        </ul>
+      </div>
+      <div class="flow">
+        <div class="flow-head">Семья</div>
+        <h3>Спокойствие, а не слежка</h3>
+        <ul>
+          <li>Связь через MAX — фото, звонки, статус</li>
+          <li>Лента: кто звонил, как настроение, что просили</li>
+          <li>Алерты: SOS, пропуск контакта, red flag</li>
+          <li>Полный контроль — данные принадлежат вам</li>
+        </ul>
+      </div>
+      <div class="flow">
+        <div class="flow-head">Оператор</div>
+        <h3>AI-подсказки и red flags</h3>
+        <ul>
+          <li>«Спросите про внука Сашу — ЕГЭ через неделю»</li>
+          <li>«Настроение падает 3 дня — рекомендуется визит»</li>
+          <li>Карточка клиента на 5 600 фактов</li>
+          <li>15–25 клиентов на оператора — AI берёт рутину</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tariffs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-tariffs">Тарифы</span>
+      <h2 id="tariffs-title">Выберите, сколько нужно заботы</h2>
+      <p id="tariffs-lead">Планшет в подарок на тарифе «Близкий» и выше. Trial «Звонок» — 990 ₽ за 3 месяца. Отмена в любой момент.</p>
+    </div>
+    <div class="tariffs reveal" id="tariffs-grid">
+      <div class="tariff">
+        <div class="tariff-name">Звонок</div>
+        <div class="tariff-subname">Воронка</div>
+        <div><span class="tariff-price">2 990</span><span class="tariff-period">₽/мес</span></div>
+        <ul>
+          <li>2 разговора в неделю по 15 мин</li>
+          <li>Фоторамка 24/7 и SOS</li>
+          <li>AI-чат «Свои»</li>
+          <li>Планшет — аренда</li>
+        </ul>
+        <div class="tariff-trial">Trial 990 ₽ / 3 мес</div>
+        <button class="btn btn-ghost" data-open-modal data-plan="Звонок" style="margin-top: 16px;">Выбрать</button>
+      </div>
+      <div class="tariff popular">
+        <div class="ribbon">Популярный</div>
+        <div class="tariff-name">Близкий</div>
+        <div class="tariff-subname">Флагман</div>
+        <div><span class="tariff-price">5 990</span><span class="tariff-period">₽/мес</span></div>
+        <ul>
+          <li>Ежедневный звонок · 4 раза в нед</li>
+          <li>Персональный куратор</li>
+          <li>Чек-ины семьи через MAX</li>
+          <li>Планшет в подарок</li>
+        </ul>
+        <div class="tariff-trial">60% клиентов выбирают этот тариф</div>
+        <button class="btn" data-open-modal data-plan="Близкий" style="margin-top: 16px;">Выбрать</button>
+      </div>
+      <div class="tariff">
+        <div class="tariff-name">Забота</div>
+        <div class="tariff-subname">Phase 3</div>
+        <div><span class="tariff-price">14 900</span><span class="tariff-period">₽/мес</span></div>
+        <ul>
+          <li>Всё из «Близкого»</li>
+          <li>10 часов сиделки в месяц</li>
+          <li>Партнёры: Мос.сиделки</li>
+          <li>Приоритетная линия SOS</li>
+        </ul>
+        <div class="tariff-trial">Запуск M21 (2027)</div>
+        <button class="btn btn-ghost" data-open-modal data-plan="Забота" style="margin-top: 16px;">Выбрать</button>
+      </div>
+      <div class="tariff">
+        <div class="tariff-name">Корпорат</div>
+        <div class="tariff-subname">B2B-канал</div>
+        <div><span class="tariff-price">24 900</span><span class="tariff-period">₽/сотр/мес</span></div>
+        <ul>
+          <li>Всё из «Близкого»</li>
+          <li>HR-отчёты и аналитика</li>
+          <li>Корпоративная скидка от 10 мест</li>
+          <li>Интеграция с HRIS</li>
+        </ul>
+        <div class="tariff-trial">Для программ «забота о родителях»</div>
+        <button class="btn btn-ghost" data-open-modal data-plan="Корпорат" style="margin-top: 16px;">Связаться</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="how-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" id="eyebrow-faq">Вопросы</span>
+      <h2 id="faq-title">Частые вопросы</h2>
+    </div>
+    <div class="faq-list reveal" id="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q">Это инструмент слежки за пожилым? <span class="chev">▾</span></div>
+        <div class="faq-a">Нет. Семья видит только то, что разрешает пожилой. Никаких скрытых камер и микрофонов. Удалили аккаунт — все данные стираются безвозвратно. Мы работаем согласно ФЗ-152 на собственных серверах в РФ.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">А если пожилой не умеет пользоваться техникой? <span class="chev">▾</span></div>
+        <div class="faq-a">В этом и суть. Планшет умеет ровно две вещи: одно касание на «Свои» — видеозвонок оператору, одно касание на «Семья» — звонок детям через MAX. Никаких настроек, приложений, YouTube или магазинов. Шрифт от 18sp, на фоторамке — 64sp.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Кто такие операторы? Им можно доверять? <span class="chev">▾</span></div>
+        <div class="faq-a">Штатные сотрудники, проходят обучение 40 часов и подписывают NDA. Каждый оператор ведёт 15–25 клиентов долго — это не колл-центр с текучкой. Все разговоры мониторятся системой качества с согласия пожилого.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что, если пожилой откажется? <span class="chev">▾</span></div>
+        <div class="faq-a">В первый месяц отмена без потерь. На практике после 3–4 звонков от своего «внука» отказов почти не бывает — сами разговоры становятся ценностью. Мы видим это на пилотах в Москве.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Где работаете? <span class="chev">▾</span></div>
+        <div class="faq-a">Сейчас — Москва и ближайшее Подмосковье. Звонки и AI доступны по всей РФ. Визиты помощника — по мере открытия городов: СПб, Казань, Екатеринбург, Нижний Новгород (план 2027–2028).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что с персональными данными и медданными? <span class="chev">▾</span></div>
+        <div class="faq-a">Все данные хранятся на собственных серверах в РФ (УЗ-2 для медицинских данных). Передачи третьим лицам нет. Видеозвонки шифруются E2E. Уведомление РКН (оператор ПД) подано. Согласие на обработку отдельной формой.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="cta-band">
+  <div class="wrap reveal">
+    <h2 id="cta-title">Подберём тариф за 5 минут</h2>
+    <p id="cta-lead">Бесплатный звонок. Расскажем, как всё устроено, без давления.</p>
+    <button class="btn" data-open-modal>Оставить заявку</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#" class="logo">
+      <img src="assets/owl-logo-white.png" alt="" width="32" height="32">
+      <span class="name">Веди</span>
+    </a>
+    <ul id="footer-links">
+      <li><a href="privacy.html">Политика</a></li>
+      <li><a href="terms.html">Оферта</a></li>
+      <li><a href="mailto:antonkuzmenkov@gmail.com">antonkuzmenkov@gmail.com</a></li>
+    </ul>
+    <div class="copyright" id="footer-copy">© 2026 Веди. Все права защищены.</div>
+  </div>
+</footer>
+
+<!-- Modal: заявка -->
+<div class="modal-back" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <form class="modal-form" id="lead-form" novalidate>
+      <div class="modal-head">
+        <h3 id="modal-title">Оставить заявку</h3>
+        <button type="button" class="modal-close" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <p class="modal-desc">Перезвоним в течение часа в рабочее время. Без обязательств.</p>
+
+      <div class="field">
+        <label for="lf-name">Как вас зовут *</label>
+        <input id="lf-name" name="name" type="text" required minlength="2" placeholder="Иван">
+        <div class="err">Укажите имя</div>
+      </div>
+
+      <div class="field">
+        <label for="lf-phone">Телефон *</label>
+        <input id="lf-phone" name="phone" type="tel" required placeholder="+7 (___) ___-__-__">
+        <div class="err">Укажите телефон в формате +7…</div>
+      </div>
+
+      <div class="field">
+        <label for="lf-email">Email (необязательно)</label>
+        <input id="lf-email" name="email" type="email" placeholder="you@example.com">
+        <div class="err">Проверьте email</div>
+      </div>
+
+      <div class="field">
+        <label for="lf-plan">Интересует тариф</label>
+        <select id="lf-plan" name="plan">
+          <option value="">Не выбрано — посоветуйте</option>
+          <option value="Звонок">Звонок · 2 990 ₽/мес</option>
+          <option value="Близкий">Близкий · 5 990 ₽/мес (флагман)</option>
+          <option value="Забота">Забота · 14 900 ₽/мес</option>
+          <option value="Корпорат">Корпорат · 24 900 ₽/сотр/мес</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="lf-comment">Комментарий</label>
+        <textarea id="lf-comment" name="comment" placeholder="Расскажите про получателя: возраст, здоровье, что важно"></textarea>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" id="lf-consent" required>
+        <span>Согласен на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">Политикой</a> и ФЗ-152</span>
+      </label>
+
+      <button type="submit" class="btn btn-gradient modal-submit">Отправить заявку</button>
+    </form>
+
+    <div class="modal-success" id="modal-success">
+      <div class="ico">✓</div>
+      <h3>Заявка отправлена</h3>
+      <p>Мы получили ваше обращение и свяжемся в течение часа в рабочее время. Если хочется быстрее — напишите на <a href="mailto:antonkuzmenkov@gmail.com" style="color:var(--indigo-600)">antonkuzmenkov@gmail.com</a>.</p>
+      <button type="button" class="btn btn-ghost" data-close-modal style="margin-top:18px">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie banner -->
+<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookies notice">
+  <p>Мы используем cookies для аналитики посещений в соответствии с <a href="privacy.html">Политикой</a>.</p>
+  <button id="cookie-accept">Понятно</button>
+</div>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.addEventListener('click', () => el.classList.toggle('open'));
+  });
+
+  // Live clock
+  function updateClock() {
+    const d = new Date();
+    const h = String(d.getHours()).padStart(2, '0');
+    const m = String(d.getMinutes()).padStart(2, '0');
+    const el = document.getElementById('clock');
+    if (el) el.textContent = `${h}:${m}`;
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#' || !id) return;
+      const el = document.querySelector(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Modal
+  const modal = document.getElementById('modal');
+  const form = document.getElementById('lead-form');
+  const success = document.getElementById('modal-success');
+  const planField = document.getElementById('lf-plan');
+
+  function openModal(plan) {
+    if (plan && planField) {
+      const opt = [...planField.options].find(o => o.value === plan);
+      if (opt) planField.value = plan;
+    }
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+    setTimeout(() => document.getElementById('lf-name').focus(), 300);
+  }
+  function closeModal() {
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+    setTimeout(() => {
+      form.classList.remove('hide');
+      success.classList.remove('show');
+      form.reset();
+      document.querySelectorAll('.field.err').forEach(f => f.classList.remove('err'));
+    }, 300);
+  }
+
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.plan));
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', closeModal);
+  });
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
+
+  // Phone mask (RU)
+  const phoneInput = document.getElementById('lf-phone');
+  phoneInput.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.startsWith('8')) v = '7' + v.slice(1);
+    if (!v.startsWith('7') && v.length > 0) v = '7' + v;
+    let s = '+7';
+    if (v.length > 1) s += ' (' + v.slice(1, 4);
+    if (v.length >= 5) s += ') ' + v.slice(4, 7);
+    if (v.length >= 8) s += '-' + v.slice(7, 9);
+    if (v.length >= 10) s += '-' + v.slice(9, 11);
+    e.target.value = s;
+  });
+
+  // Form submit — сейчас: mailto + локальное сохранение в localStorage (как fallback)
+  // После деплоя — подключить Formspree/Tally/Telegram Bot endpoint
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let valid = true;
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('err'));
+
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const consent = document.getElementById('lf-consent').checked;
+
+    if (name.length < 2) { document.getElementById('lf-name').closest('.field').classList.add('err'); valid = false; }
+    if (phone.replace(/\D/g, '').length < 11) { document.getElementById('lf-phone').closest('.field').classList.add('err'); valid = false; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('lf-email').closest('.field').classList.add('err'); valid = false; }
+    if (!consent) { valid = false; alert('Подтвердите согласие на обработку данных'); return; }
+    if (!valid) return;
+
+    const payload = {
+      name, phone, email,
+      plan: form.plan.value,
+      comment: form.comment.value.trim(),
+      ts: new Date().toISOString(),
+      ua: navigator.userAgent,
+      url: location.href
+    };
+
+    // Сохраняем локально для CMS-просмотра
+    try {
+      const leads = JSON.parse(localStorage.getItem('vedi_leads') || '[]');
+      leads.push(payload);
+      localStorage.setItem('vedi_leads', JSON.stringify(leads));
+    } catch (e) {}
+
+    // Открываем mailto как надёжный fallback
+    const subject = encodeURIComponent(`Заявка Веди — ${name}${payload.plan ? ' · ' + payload.plan : ''}`);
+    const body = encodeURIComponent(
+      `Имя: ${name}\nТелефон: ${phone}\nEmail: ${email || '—'}\nТариф: ${payload.plan || '—'}\n\nКомментарий:\n${payload.comment || '—'}\n\n--\nОтправлено с vedi.app`
+    );
+    const mailto = `mailto:antonkuzmenkov@gmail.com?subject=${subject}&body=${body}`;
+
+    // Endpoint для Formspree/Tally может быть подключён здесь:
+    // fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
+
+    // Открыть mailto в новом окне (не перезагружая страницу)
+    window.open(mailto, '_blank');
+
+    form.classList.add('hide');
+    success.classList.add('show');
+  });
+
+  // Cookie banner
+  if (!localStorage.getItem('vedi_cookie_ok')) {
+    setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 800);
+  }
+  document.getElementById('cookie-accept').addEventListener('click', () => {
+    localStorage.setItem('vedi_cookie_ok', '1');
+    document.getElementById('cookie-banner').classList.remove('show');
+  });
+
+  // Optional: hydrate from content/site.json (CMS variant B)
+  (async () => {
+    try {
+      const res = await fetch('content/site.json');
+      if (!res.ok) return;
+      const c = await res.json();
+      const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+      set('hero-title', c.hero?.title);
+      set('hero-accent', c.hero?.titleAccent);
+      set('hero-lead', c.hero?.lead);
+    } catch {}
+  })();
+</script>
+</body>
+</html>

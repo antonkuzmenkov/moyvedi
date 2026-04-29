@@ -1,0 +1,25 @@
+{
+  "name": "Веди — лекарство от одиночества",
+  "short_name": "Веди",
+  "description": "Цифровой компаньон 75+. Живой оператор-«внук», цифровая память, связь с семьёй через MAX.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F5",
+  "theme_color": "#4F46E5",
+  "lang": "ru",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/owl-logo-small.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/owl-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

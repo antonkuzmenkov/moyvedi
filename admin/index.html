@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4F46E5">
+<title>Веди — CMS</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../assets/owl-logo-small.png">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; background: #FAF7F5; font-family: var(--font-body); color: var(--fg-2); padding: 40px 0 100px; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+  .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(79,70,229,0.12); flex-wrap: wrap; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 36px; height: 36px; }
+  .logo .name { font-family: var(--font-display); font-weight: 800; color: var(--indigo-950); font-size: 20px; }
+  .logo .sub { font-size: 11px; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; font-family: var(--font-body); }
+  .btn-primary { background: var(--indigo-600); color: #fff; }
+  .btn-primary:hover { background: #4338CA; transform: translateY(-1px); }
+  .btn-ghost { background: rgba(79,70,229,0.08); color: var(--indigo-950); }
+  .btn-ghost:hover { background: rgba(79,70,229,0.15); }
+  .btn-ok { background: var(--emerald); color: #fff; }
+  .btn-danger { background: rgba(220,38,38,0.1); color: #DC2626; }
+  .btn-danger:hover { background: rgba(220,38,38,0.18); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; padding: 4px; background: rgba(79,70,229,0.08); border-radius: 14px; margin-bottom: 24px; max-width: fit-content; }
+  .tab { padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--slate-500); border: none; background: transparent; font-family: var(--font-body); transition: all 0.2s; }
+  .tab.active { background: #fff; color: var(--indigo-950); box-shadow: 0 4px 12px -4px rgba(79,70,229,0.15); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Panels */
+  .panel { background: #fff; border-radius: 20px; padding: 28px; margin-bottom: 18px; border: 1px solid rgba(79,70,229,0.08); }
+  .panel h2 { font-family: var(--font-display); font-size: 20px; color: var(--indigo-950); margin: 0 0 4px; letter-spacing: -0.01em; }
+  .panel .desc { font-size: 13px; color: var(--slate-500); margin: 0 0 18px; }
+  .field { margin-bottom: 14px; }
+  label { display: block; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  input, textarea, select {
+    width: 100%; box-sizing: border-box;
+    padding: 11px 14px; border-radius: 10px;
+    border: 1px solid rgba(79,70,229,0.15);
+    font-family: var(--font-body); font-size: 14px; color: var(--indigo-950);
+    background: #FCFBFA; transition: all 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--indigo-600); background: #fff; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+  textarea { min-height: 70px; resize: vertical; line-height: 1.5; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .item-card { background: #FCFBFA; border-radius: 14px; padding: 18px; margin-bottom: 12px; border: 1px solid rgba(79,70,229,0.1); }
+  .item-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .item-card-head .badge { font-family: var(--font-display); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--indigo-600); padding: 4px 10px; background: rgba(79,70,229,0.08); border-radius: 999px; }
+  .toolbar { position: sticky; bottom: 16px; background: rgba(30,27,75,0.95); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 40px -12px rgba(30,27,75,0.4); margin-top: 24px; flex-wrap: wrap; gap: 12px; }
+  .toolbar .status { color: rgba(255,255,255,0.85); font-size: 13px; }
+  .toolbar .actions { display: flex; gap: 10px; }
+  details summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; color: var(--indigo-950); padding: 8px 0; user-select: none; font-size: 14px; }
+  details summary::marker { color: var(--indigo-600); }
+  details { padding: 6px 0; }
+  .checkbox { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--fg-2); }
+  .checkbox input { width: auto; }
+
+  /* Leads */
+  .lead-card { background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 12px; border: 1px solid rgba(79,70,229,0.1); }
+  .lead-card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+  .lead-card .name { font-family: var(--font-display); font-weight: 700; color: var(--indigo-950); font-size: 17px; }
+  .lead-card .ts { font-size: 12px; color: var(--slate-500); font-variant-numeric: tabular-nums; }
+  .lead-card .row { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--fg-2); margin-bottom: 6px; }
+  .lead-card .row b { color: var(--indigo-600); }
+  .lead-card .comment { font-size: 14px; color: var(--fg-2); margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(79,70,229,0.15); line-height: 1.5; }
+  .lead-empty { text-align: center; padding: 60px 20px; color: var(--slate-500); }
+  .lead-empty .ico { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+  .lead-counter { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; background: rgba(79,70,229,0.08); border-radius: 999px; font-size: 13px; color: var(--indigo-600); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="logo">
+      <img src="../assets/owl-logo.png" alt="Веди">
+      <div>
+        <div class="name">Веди</div>
+        <div class="sub">CMS · Управление контентом</div>
+      </div>
+    </div>
+    <div class="actions">
+      <a href="../index.html" target="_blank" class="btn btn-ghost">Открыть сайт ↗</a>
+      <button class="btn btn-primary" onclick="save()">Скачать site.json</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="content">Контент</button>
+    <button class="tab" data-tab="leads">Заявки <span class="lead-counter" id="lead-count">0</span></button>
+  </div>
+
+  <div class="tab-content active" id="tab-content">
+    <div class="panel">
+      <h2>Бренд</h2>
+      <p class="desc">Имя, тагалайн, контакты.</p>
+      <div class="grid-2">
+        <div class="field"><label>Название</label><input data-path="brand.name" type="text"></div>
+        <div class="field"><label>Email</label><input data-path="brand.email" type="email"></div>
+      </div>
+      <div class="field"><label>Тагалайн</label><input data-path="brand.tagline" type="text"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Hero (главный экран)</h2>
+      <p class="desc">Первое, что видит посетитель.</p>
+      <div class="field"><label>Eyebrow</label><input data-path="hero.eyebrow" type="text"></div>
+      <div class="grid-2">
+        <div class="field"><label>Заголовок</label><input data-path="hero.title" type="text"></div>
+        <div class="field"><label>Заголовок акцент</label><input data-path="hero.titleAccent" type="text"></div>
+      </div>
+      <div class="field"><label>Описание</label><textarea data-path="hero.lead"></textarea></div>
+      <div class="grid-2">
+        <div class="field"><label>CTA primary</label><input data-path="hero.ctaPrimary" type="text"></div>
+        <div class="field"><label>CTA secondary</label><input data-path="hero.ctaSecondary" type="text"></div>
+      </div>
+      <details>
+        <summary>3 цифры под Hero</summary>
+        <div id="hero-metrics-list"></div>
+      </details>
+    </div>
+
+    <div class="panel">
+      <h2>Полоса доверия</h2>
+      <p class="desc">4 коротких пилла с эмодзи (показываются под Hero).</p>
+      <div id="trust-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Три шага</h2>
+      <p class="desc">Как клиент попадает к первому звонку.</p>
+      <div id="steps-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Тарифы</h2>
+      <p class="desc">4 карточки с ценами.</p>
+      <div id="tariffs-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Часто задаваемые вопросы</h2>
+      <p class="desc">Раскрываются по клику.</p>
+      <div id="faq-list"></div>
+      <button class="btn btn-ghost" onclick="addFaq()" style="margin-top:12px">+ Добавить вопрос</button>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-leads">
+    <div class="panel">
+      <h2>Заявки с сайта</h2>
+      <p class="desc">Заявки сохраняются в localStorage браузера, где открыт сайт. Откройте этот CMS в том же браузере, где посетители оставляли заявки.</p>
+      <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="exportLeads()">Экспортировать в CSV</button>
+        <button class="btn btn-danger" onclick="clearLeads()">Очистить все заявки</button>
+      </div>
+      <div id="leads-container"></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="status" id="status">Изменения не сохранены</div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="reload()">Сбросить</button>
+      <button class="btn btn-ok" onclick="save()">Скачать site.json</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let DATA = null;
+const get = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
+const set = (obj, path, val) => {
+  const parts = path.split('.');
+  const last = parts.pop();
+  const tgt = parts.reduce((o, k) => (o[k] ??= {}), obj);
+  tgt[last] = val;
+};
+const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const escapeAttr = s => String(s ?? '').replace(/"/g, '&quot;');
+
+async function load() {
+  const res = await fetch('../content/site.json');
+  DATA = await res.json();
+  if (!DATA.trust) DATA.trust = [];
+  if (!DATA.steps) DATA.steps = { items: [] };
+  if (!DATA.steps.items) DATA.steps.items = [];
+  renderAll();
+  renderLeads();
+}
+
+function renderAll() {
+  document.querySelectorAll('[data-path]').forEach(el => {
+    const p = el.dataset.path;
+    el.value = get(DATA, p) || '';
+    el.oninput = () => { set(DATA, p, el.value); markDirty(); };
+  });
+
+  const hm = document.getElementById('hero-metrics-list');
+  hm.innerHTML = '';
+  (DATA.hero?.metrics || []).forEach((m, i) => {
+    hm.insertAdjacentHTML('beforeend', `
+      <div class="item-card">
+        <div class="grid-2">
+          <div class="field"><label>Значение</label><input value="${escapeAttr(m.value)}" oninput="DATA.hero.metrics[${i}].value=this.value;markDirty()"></div>
+          <div class="field"><label>Подпись</label><input value="${escapeAttr(m.label)}" oninput="DATA.hero.metrics[${i}].label=this.value;markDirty()"></div>
+        </div>
+      </div>`);
+  });
+
+  const trustList = document.getElementById('trust-list');
+  trustList.innerHTML = '';
+  (DATA.trust || []).forEach((t, i) => {
+    trustList.insertAdjacentHTML('beforeend', `
+      <div class="item-card">
+        <div class="item-card-head">
+          <div class="badge">Pill ${i + 1}</div>
+          <button class="btn btn-danger" onclick="DATA.trust.splice(${i},1);renderAll();markDirty()">Удалить</button>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Эмодзи / иконка</label><input value="${escapeAttr(t.ico)}" oninput="DATA.trust[${i}].ico=this.value;markDirty()"></div>
+          <div class="field"><label>Текст</label><input value="${escapeAttr(t.text)}" oninput="DATA.trust[${i}].text=this.value;markDirty()"></div>
+        </div>
+      </div>`);
+  });
+  trustList.insertAdjacentHTML('beforeend', `<button class="btn btn-ghost" onclick="DATA.trust.push({ico:'✨',text:'Новый пункт'});renderAll();markDirty()">+ Добавить пункт</button>`);
+
+  const stepsList = document.getElementById('steps-list');
+  stepsList.innerHTML = '';
+  (DATA.steps?.items || []).forEach((s, i) => {
+    stepsList.insertAdjacentHTML('beforeend', `
+      <div class="item-card">
+        <div class="item-card-head">
+          <div class="badge">Шаг ${i + 1}</div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Номер</label><input value="${escapeAttr(s.num)}" oninput="DATA.steps.items[${i}].num=this.value;markDirty()"></div>
+          <div class="field"><label>Заголовок</label><input value="${escapeAttr(s.title)}" oninput="DATA.steps.items[${i}].title=this.value;markDirty()"></div>
+        </div>
+        <div class="field"><label>Описание</label><textarea oninput="DATA.steps.items[${i}].body=this.value;markDirty()">${escapeHtml(s.body)}</textarea></div>
+      </div>`);
+  });
+
+  const tl = document.getElementById('tariffs-list');
+  tl.innerHTML = '';
+  (DATA.tariffs?.items || []).forEach((t, i) => {
+    tl.insertAdjacentHTML('beforeend', `
+      <div class="item-card">
+        <div class="item-card-head">
+          <div class="badge">Тариф ${i + 1}</div>
+          <label class="checkbox"><input type="checkbox" ${t.popular?'checked':''} onchange="DATA.tariffs.items[${i}].popular=this.checked;markDirty()"> Популярный</label>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Название</label><input value="${escapeAttr(t.name)}" oninput="DATA.tariffs.items[${i}].name=this.value;markDirty()"></div>
+          <div class="field"><label>Подпись</label><input value="${escapeAttr(t.subname)}" oninput="DATA.tariffs.items[${i}].subname=this.value;markDirty()"></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Цена</label><input value="${escapeAttr(t.price)}" oninput="DATA.tariffs.items[${i}].price=this.value;markDirty()"></div>
+          <div class="field"><label>Период</label><input value="${escapeAttr(t.period)}" oninput="DATA.tariffs.items[${i}].period=this.value;markDirty()"></div>
+        </div>
+        <div class="field"><label>Trial / подпись</label><input value="${escapeAttr(t.trial)}" oninput="DATA.tariffs.items[${i}].trial=this.value;markDirty()"></div>
+        <div class="field"><label>Список (по строке на пункт)</label><textarea oninput="DATA.tariffs.items[${i}].features=this.value.split('\\n').filter(Boolean);markDirty()">${escapeHtml((t.features||[]).join('\n'))}</textarea></div>
+      </div>`);
+  });
+
+  const fl = document.getElementById('faq-list');
+  fl.innerHTML = '';
+  (DATA.faq?.items || []).forEach((f, i) => {
+    fl.insertAdjacentHTML('beforeend', `
+      <div class="item-card">
+        <div class="item-card-head">
+          <div class="badge">Вопрос ${i + 1}</div>
+          <button class="btn btn-danger" onclick="DATA.faq.items.splice(${i},1);renderAll();markDirty()">Удалить</button>
+        </div>
+        <div class="field"><label>Вопрос</label><input value="${escapeAttr(f.q)}" oninput="DATA.faq.items[${i}].q=this.value;markDirty()"></div>
+        <div class="field"><label>Ответ</label><textarea oninput="DATA.faq.items[${i}].a=this.value;markDirty()">${escapeHtml(f.a)}</textarea></div>
+      </div>`);
+  });
+}
+
+function addFaq() {
+  DATA.faq.items.push({ q: 'Новый вопрос', a: 'Ответ' });
+  renderAll();
+  markDirty();
+}
+
+function markDirty() {
+  document.getElementById('status').textContent = 'Несохранённые изменения';
+  document.getElementById('status').style.color = '#FCD34D';
+}
+
+function save() {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'site.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  document.getElementById('status').textContent = 'Скачано · замените content/site.json';
+  document.getElementById('status').style.color = '#10B981';
+}
+
+function reload() { load(); }
+
+// Tabs
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+  });
+});
+
+// Leads
+function getLeads() {
+  try { return JSON.parse(localStorage.getItem('vedi_leads') || '[]'); } catch { return []; }
+}
+function renderLeads() {
+  const leads = getLeads();
+  document.getElementById('lead-count').textContent = leads.length;
+  const c = document.getElementById('leads-container');
+  if (!leads.length) {
+    c.innerHTML = `<div class="lead-empty">
+      <div class="ico">📭</div>
+      <h3 style="font-family:var(--font-display);color:var(--indigo-950);margin:0 0 8px;">Пока нет заявок</h3>
+      <p style="margin:0;font-size:14px;">Заявки появятся здесь, как только посетители оставят их через сайт.<br>
+      Заявки сохраняются в localStorage этого браузера + дублируются на email через mailto.</p>
+    </div>`;
+    return;
+  }
+  c.innerHTML = '';
+  [...leads].reverse().forEach((l, i) => {
+    const ts = new Date(l.ts).toLocaleString('ru-RU');
+    c.insertAdjacentHTML('beforeend', `
+      <div class="lead-card">
+        <div class="top">
+          <div>
+            <div class="name">${escapeHtml(l.name)}</div>
+            <div class="ts">${escapeHtml(ts)}</div>
+          </div>
+          <button class="btn btn-danger" onclick="deleteLead(${leads.length - 1 - i})">Удалить</button>
+        </div>
+        <div class="row"><b>Телефон:</b> ${escapeHtml(l.phone)}</div>
+        ${l.email ? `<div class="row"><b>Email:</b> ${escapeHtml(l.email)}</div>` : ''}
+        ${l.plan ? `<div class="row"><b>Тариф:</b> ${escapeHtml(l.plan)}</div>` : ''}
+        ${l.comment ? `<div class="comment">${escapeHtml(l.comment)}</div>` : ''}
+      </div>`);
+  });
+}
+function deleteLead(idx) {
+  if (!confirm('Удалить заявку?')) return;
+  const leads = getLeads();
+  leads.splice(idx, 1);
+  localStorage.setItem('vedi_leads', JSON.stringify(leads));
+  renderLeads();
+}
+function clearLeads() {
+  if (!confirm('Удалить все заявки безвозвратно?')) return;
+  localStorage.removeItem('vedi_leads');
+  renderLeads();
+}
+function exportLeads() {
+  const leads = getLeads();
+  if (!leads.length) { alert('Нет заявок для экспорта'); return; }
+  const headers = ['ts', 'name', 'phone', 'email', 'plan', 'comment'];
+  const csv = [headers.join(',')].concat(leads.map(l => headers.map(h => `"${String(l[h] || '').replace(/"/g, '""')}"`).join(','))).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `vedi-leads-${new Date().toISOString().split('T')[0]}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+load();
+</script>
+</body>
+</html>
